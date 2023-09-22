@@ -1,3 +1,6 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 // necessary libraries -------->
 #include <csignal>
 #include <sys/mman.h>
@@ -53,3 +56,5 @@ bool flag_shm_read(const char*);
 void sig_handlr(int);
 // power off server
 void power_off_server(void);
+
+#endif // !SERVER_H

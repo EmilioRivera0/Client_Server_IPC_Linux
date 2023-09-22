@@ -1,3 +1,6 @@
+#ifndef CLIENT_H
+#define CLIENT_H
+
 // necessary libraries -------->
 #include <sys/mman.h>
 #include <fcntl.h>
@@ -54,3 +57,5 @@ void shm_write(char*);
 void power_off_client(void);
 // interface
 char menu(void);
+
+#endif // !CLIENT_H
