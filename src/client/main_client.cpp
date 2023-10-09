@@ -1,5 +1,5 @@
 // necessary libraries -------->
-#include "lib/headers/client.h"
+#include "../lib/headers/monitor.h"
 
 // program execution -------->
 int main (int argc, char *argv[]) {
@@ -11,20 +11,22 @@ int main (int argc, char *argv[]) {
 
   // system init
   client_init(flagptr, shmptr, server_pid);
+  Semaphore_Monitor sem_monitor(false);
   // client up and working
   while (true) {
     op = menu();
     switch (op) {
       // send message
       case '1':
-        shm_write(shmptr);
-        flag_shm_write(flagptr);
+        sem_monitor.read_write(shmptr);
         usleep(500000);
         get_server_count(flagptr);
         break;
       // close server
       case '2':
         kill(server_pid, SIGUSR1);
+        sem_monitor.~Semaphore_Monitor();
+        power_off_client();
         break;
       // close client
       case '0':

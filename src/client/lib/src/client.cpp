@@ -36,7 +36,7 @@ void open_flag(char*& flagptr){
   if (fdescriptor == -1)
     throw exc::shm_open_fail();
 
-  std::cout << SHM_NAME << " Successfuly Opened" << std::endl;
+  std::cout << FLAG_NAME << " Successfuly Opened" << std::endl;
   // assign size to flag shm
   if (ftruncate(fdescriptor, SHM_SIZE) == -1)
     throw exc::ftruncate_fail();
@@ -114,15 +114,6 @@ void get_server_count(const char*flagptr){
   tokptr = strtok(nullptr, " ");
   count = atoi(tokptr);
   std::cout << "Server Message Count " << count << std::endl;
-}
-
-void flag_shm_write(char* flagptr){
-  // local variables
-  char string[SHM_SIZE]{"W"};
-  // clear flag shm
-  memset(flagptr, 0, SHM_SIZE);
-  // write message on shm
-  memcpy(flagptr, string, SHM_SIZE);
 }
 
 void shm_write(char* shmptr){

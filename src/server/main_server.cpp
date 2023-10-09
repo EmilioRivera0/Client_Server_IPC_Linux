@@ -1,5 +1,5 @@
 // necessary libraries -------->
-#include "lib/headers/server.h"
+#include "../lib/headers/monitor.h"
 
 // program execution -------->
 int main (int argc, char *argv[]) {
@@ -9,15 +9,14 @@ int main (int argc, char *argv[]) {
   char * shmptr{nullptr};
   char * flagptr{nullptr};
   std::ofstream message_log_file{};
+  Semaphore_Monitor sem_monitor(true);
  
   // system init
   server_init(flagptr, shmptr, message_log_file, pid);
   // server up and working
   while (true) {
-    if (flag_shm_read(flagptr)) {
-      shm_read(shmptr, count, message_log_file);
-      flag_shm_write(flagptr, pid, count);
-    }
+    sem_monitor.read_write(shmptr, count, message_log_file);
+    flag_shm_write(flagptr, pid, count);
   }
   return 0;
 }

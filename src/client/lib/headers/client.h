@@ -27,12 +27,14 @@ namespace exc {
 struct shm_open_fail : std::exception{
   const char * what() const noexcept{return "Program Failed to Open SHM\n";}
 };
+#ifndef INCLUDE_ONCE
 struct ftruncate_fail : std::exception{
   const char * what() const noexcept{return "Program Failed to Truncate File\n";}
 };
 struct mmap_fail : std::exception{
   const char * what() const noexcept{return "Program Failed to Map SHM into Memory\n";}
 };
+#endif // !INCLUDE_ONCE
 struct fork_fail : std::exception{
   const char * what() const noexcept{return "Program Failed to Create Child Process\n";}
 };
@@ -51,7 +53,6 @@ void start_server(void);
 void get_server_pid(char*&, pid_t&);
 // client working
 void get_server_count(const char*);
-void flag_shm_write(char*);
 void shm_write(char*);
 // power off client
 void power_off_client(void);

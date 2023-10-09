@@ -51,7 +51,6 @@ void create_messg_log(std::ofstream&);
 // server working
 void shm_read(const char*, short int&, std::ofstream&);
 void flag_shm_write(char*, pid_t&, const short int&);
-bool flag_shm_read(const char*);
 // signal handler
 void sig_handlr(int);
 // power off server

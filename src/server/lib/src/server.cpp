@@ -102,14 +102,6 @@ void flag_shm_write(char* flagptr, pid_t& pid, const short int& count){
   memcpy(flagptr, string, SHM_SIZE);
 }
 
-bool flag_shm_read(const char* flagptr){
-  while (true) {
-    // check if a client sent a message on shm
-    if (*flagptr == 'W')
-      return true;
-  }
-}
-
 void sig_handlr(int num){
   power_off_server();
 }
