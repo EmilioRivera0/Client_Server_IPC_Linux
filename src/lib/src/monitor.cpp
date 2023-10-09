@@ -28,6 +28,7 @@ Semaphore_Monitor::Semaphore_Monitor(const bool server):is_server(server){
 }
 
 Semaphore_Monitor::~Semaphore_Monitor(){
+  // close and unlink semaphore
   std::cout << "Semaphore Closed and Unlinked" << std::endl;
   sem_close(this->sem_ptr);
   sem_unlink(SEMAPHORE_NAME);
@@ -54,6 +55,7 @@ void Semaphore_Monitor::read_write(char* shmptr, short int& count, std::ofstream
       // save readed message
       memcpy(this->temp_messg, string, SHM_SIZE);
       std::cout << string << std::endl;
+      // save message in Message.log
       message_log_file << string << std::endl;
       count++;
       break;

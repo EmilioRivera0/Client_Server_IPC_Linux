@@ -15,6 +15,7 @@ int main (int argc, char *argv[]) {
   server_init(flagptr, shmptr, message_log_file, pid);
   // server up and working
   while (true) {
+    // wait for new message, save it and update flag shm
     sem_monitor.read_write(shmptr, count, message_log_file);
     flag_shm_write(flagptr, pid, count);
   }

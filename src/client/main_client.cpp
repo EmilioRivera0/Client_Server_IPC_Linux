@@ -18,7 +18,9 @@ int main (int argc, char *argv[]) {
     switch (op) {
       // send message
       case '1':
+        // wait and send a message
         sem_monitor.read_write(shmptr);
+        // wait for server to read message and update the message count
         usleep(500000);
         get_server_count(flagptr);
         break;
